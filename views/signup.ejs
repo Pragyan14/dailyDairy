@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Dairy | Signup</title>
+    <link rel="stylesheet" href="/css/loginPage.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>SIGN UP</span></div>
+        <form action="/signup" method="POST">
+          <div class="row">
+            <input type="text" placeholder="Username" name="userId" required />
+          </div>
+          <div class="row">
+            <input type="text" placeholder="Email" name="username" required />
+          </div>
+          <div class="row">
+            <input type="password" placeholder="Password" name="password" require />
+          </div>
+          <div class="row button">
+            <input type="submit" value="Signup" />
+          </div>
+          <div class="signup-link">
+            Already have account? <a href="/login">Login</a>
+          </div>
+        </form>
+      </div>
+      <div class="note">
+        <p><b>Note:</b> Please feel free to sign up as this is only a small project and none of your information will be exploited.</p>
+      </div>
+    </div>
+  </body>
+</html>

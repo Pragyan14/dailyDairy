@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0px;
+  background-color: #191414;
+}
+
+.nav {
+  height: 52px;
+  width: 100%;
+  background: #f4f6fc;
+  position: relative;
+  padding: 0px 40px;
+}
+
+.nav > .nav-header {
+  display: inline;
+}
+
+.nav > .nav-header > .nav-title {
+  display: inline-block;
+  font-size: 1.5em;
+  color: black;
+  padding: 10px 10px 10px 10px;
+  font-size: 1.5em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+}
+
+.nav > .nav-btn {
+  display: none;
+}
+
+.nav > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+.nav > .nav-links > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 1em;
+  letter-spacing: 0.2em;
+}
+
+.nav > .nav-links > a:hover {
+  color: #57b846;
+}
+
+.nav > #nav-check {
+  display: none;
+}
+
+/* HEAD 
+------------------------------------- */
+.head {
+  color: #f4f6fc;
+  margin: 0 58px;
+}
+
+/* CONTAINER 
+--------------------------------------- */
+.container {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 10px 50px;
+}
+
+.foundRecordDiv {
+  background: #b9fbc0;
+  border-radius: 25px;
+  padding: 8px 26px;
+  /* margin-bottom: 12px; */
+}
+.container h3{
+  margin: -4px 0 -8px 0;
+  font-size: 20px; 
+}
+.container p{
+  font-weight: 400;
+  font-size: 14px;
+  text-align: justify;
+}
+
+
+/* No Record Found
+-------------------------c */
+.noRecordDiv{
+  margin-left: 8px;
+}
+.noRecords{
+  color: #656871;
+}
+.composeBtn {
+  background-color: #57b846;
+  color: white;
+  border: none;
+  cursor: pointer;
+  height: 48px;
+  width: 152px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 25px;
+}
+
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 0 10px;
+  }
+
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+  }
+
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+
+  .nav > .nav-btn > label:hover,
+  .nav #nav-check:checked ~ .nav-btn > label {
+    cursor: pointer;
+  }
+
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid black;
+  }
+
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #f4f6fc;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+    padding-left: 12px;
+  }
+
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
+  }
+
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+
+  .nav > #nav-check:checked ~ .nav-links {
+    height: 180px;
+    overflow-y: auto;
+  }
+
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0 18px;
+  }
+
+  .head {
+    margin: 0 24px;
+  }
+
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 25px;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Dairy | Old Records</title>
+    <link rel="stylesheet" href="/css/viewPage.css">
+    <script src="https://kit.fontawesome.com/f90678a76f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+      <div class="nav-title">
+        DAILY DIARY 
+      </div>
+    </div>
+    <div class="nav-btn">
+      <label for="nav-check">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+    
+    <div class="nav-links">
+      <a href="/home" >HOME</a>
+      <a href="#" >ABOUT</a>
+      <a href="#" >HELP</a>
+    </div>
+  </div>
+  <div class="head">
+    <h1>Old Records</h1>
+  </div>
+  <div class="container" >
+    <% if(contentArray.length == 0) { %>
+      <div class="noRecordDiv">
+        <h2 class="noRecords">No Records Found</h2>
+        <form action="/compose" method="get" >
+        <button type="submit" class="composeBtn">Compose</button>
+        </form>
+      </div>
+    <% } %>
+    <% contentArray.forEach(function(item){ %>
+      <div class="foundRecordDiv">
+        <h2><%= item.date %></h2>
+        <h3><%= item.title %></h3>
+        <p><%= item.content.substring(0, 311) + "... "%><a href="/view/<%=item._id%>">Read More</a></p>
+      </div>
+   <% }) %>
+</div>
+</body>
+</html>
