@@ -10,13 +10,12 @@ const passportLocalMongoose = require("passport-local-mongoose");
 mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODBCONNECTION);
 
-console.log(process.env.MONGODBCONNECTION);
-
 const app = express();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyparser.urlencoded({ extended: true }));
 
+app.set('trust proxy', 1)
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
@@ -134,20 +133,7 @@ app.get("/view/:recordId",function(req,res){
   if (req.isAuthenticated()) {
     requestedId = req.params.recordId;
     var foundRecord = req.user.contentArray.find(contentArray => contentArray._id == requestedId);
-    // console.log(foundRecord.title+" "+foundRecord.content);
     res.render("record",{clickedRecord: foundRecord});
-    // var final = "ObjectId(\"63f08d0b97666f4aae799ef6\")";
-    // var try123 = "Try 3"
-    // var foundRecord = User.aggregate([{$unwind:"$content"},{$match:{"content.title":try123}}]);
-    // User.aggregate([{$unwind:"$content"},{$match:{"content.title":try123}}],function(err,foundRecord){
-    //   if(err){
-    //     console.log(err);
-    //   } else {
-    //     res.send(foundRecord);
-    //     console.log(foundRecord);
-    //   }
-    // })
-    // console.log(foundRecord);
   } else {
     res.redirect("/");
   }
