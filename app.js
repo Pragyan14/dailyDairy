@@ -10,6 +10,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODBCONNECTION);
 
+console.log(process.env.MONGODBCONNECTION);
+
 const app = express();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -151,6 +153,6 @@ app.get("/view/:recordId",function(req,res){
   }
 });
 
-app.listen(5500, function () {
+app.listen(process.env.PORT || 5500, function () {
   console.log("Server is running on port 5500");
 });
