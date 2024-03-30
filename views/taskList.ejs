@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KEEPER</title>
+    <link rel="stylesheet" href="/css/viewPage.css" />
+    <script
+      src="https://kit.fontawesome.com/f90678a76f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="nav">
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">Keeper</div>
+      </div>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+
+      <div class="nav-links">
+        <a href="/home">HOME</a>
+        <a href="#">ABOUT</a>
+        <a href="#">HELP</a>
+      </div>
+    </div>
+
+    <div class="box" id="heading">
+      <h1><%= listTitle %></h1>
+    </div>
+    
+    <div class="box">
+      
+      <% taskArray.forEach(function(item){ %>
+        <form action="/delete" method="post">
+          <div class="item">
+            <input type="checkbox" name="checkBox"  />
+            <p><%= item.task %></p>
+            <button class="deleteBtn"><i class="fa-regular fa-trash-can"></i></button>
+            <input type="hidden" name="deleteItemId" value="<%=item._id%>" />
+          </div>
+        </form>
+      <% }) %>
+
+      <form class="item" action="/addTask" method="post">
+        <input type="text" name="newTask" placeholder="Add Task" autocomplete="off" required/>
+        <button type="submit" class="addBtn">+</button>
+      </form>
+    </div>
+    <footer>
+      <div class="footerDiv">
+        <div class="regards">
+          <p>Crafted with 💚 by Pragyan</p>
+        </div>
+        <div class="icon">
+          <a href="https://www.linkedin.com/in/pragyan-patidar/" ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+          <a href="https://github.com/Pragyan14" ><i class="fa-brands fa-github fa-2xl"></i></a>
+          <a href="https://www.instagram.com/pragyanpatidar/" ><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+  </html>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<% if(contentArray.length == 0) { %>
+      <div class="noRecordDiv">
+        <h2 class="noRecords">No Records Found</h2>
+        <form action="/compose" method="get" >
+        <button type="submit" class="composeBtn">Compose</button>
+        </form>
+      </div>
+    <% } %>
+    <% contentArray.forEach(function(item){ %>
+      <div class="foundRecordDiv">
+        <h2><%= item.date %></h2>
+        <h3><%= item.title %></h3>
+        <p><%= item.content.substring(0, 311) + "... "%><a href="/view/<%=item._id%>">Read More</a></p>
+      </div>
+   <% }) %>

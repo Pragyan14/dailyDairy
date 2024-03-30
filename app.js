@@ -8,8 +8,8 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGODBCONNECTION);
-// mongoose.connect("mongodb://0.0.0.0:27017/todolistDB",{useNewUrlParser: true});
+// mongoose.connect(process.env.MONGODBCONNECTION);
+mongoose.connect("mongodb://0.0.0.0:27017/todolistDB",{useNewUrlParser: true});
 
 
 const app = express();
@@ -27,7 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var userSchema = new mongoose.Schema({ email: String,userId:String,password: String,contentArray:[{date:String,title:String,content:String}]});
+var userSchema = new mongoose.Schema({ email: String,password: String,taskArray:[{task:String}]});
 userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("users", userSchema);
 
@@ -51,39 +51,21 @@ app.get("/home", function (req, res) {
   }
 });
 
-app.get("/compose", function (req, res) {
+app.get("/taskList", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("compose");
+    var taskArray = req.user.taskArray;
+    let today = new Date();
+  let options = {weekday: "short",day: "numeric",month: "short"};
+  let day = today.toLocaleDateString("en-US", options)
+    res.render("taskList",{taskArray: taskArray, listTitle:day});
   } else {
     res.redirect("/");
   }
-});
-
-app.get("/view", function (req, res) {
-  if (req.isAuthenticated()) {
-    var contentArray = req.user.contentArray;
-    contentArray.reverse();
-    res.render("view",{contentArray: contentArray});
-  } else {
-    res.redirect("/");
-  }
-});
-
-
-app.get("/logout", function (req, res) {
-  req.logout(function (err) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-        res.redirect("/");
-    }
-  });
 });
 
 app.post("/signup", function (req, res) {
   User.register(
-    { username: req.body.username,userId:req.body.userId },
+    { username: req.body.username },
     req.body.password,
     function (err, user) {
       if (err) {
@@ -114,31 +96,61 @@ app.post("/", function (req, res) {
   });
 });
 
-app.post("/compose",function(req,res){
-  const submittedTitle = req.body.title;
-  const submittedContent = req.body.content;
+// app.post("/compose",function(req,res){
+//   const submittedTitle = req.body.title;
+//   const submittedContent = req.body.content;
 
-  let today = new Date();
-  let options = {weekday: "short",day: "numeric",month: "short"};
-  let day = today.toLocaleDateString("en-US", options)
+//   let today = new Date();
+//   let options = {weekday: "short",day: "numeric",month: "short"};
+//   let day = today.toLocaleDateString("en-US", options)
 
-  User.findOneAndUpdate({_id:req.user._id},{$push: {contentArray:{date:day,title:submittedTitle,content:submittedContent}}},function(err){
+//   User.findOneAndUpdate({_id:req.user._id},{$push: {taskArray:{date:day,title:submittedTitle,content:submittedContent}}},function(err){
+//     if(err){
+//       console.log(err);
+//     } else {
+//       res.redirect("/taskList");
+//     }
+//   })
+// });
+
+app.post("/addTask",function(req,res){
+  console.log(req.body);
+  console.log(req.user._id);
+  const task = req.body.newTask
+  User.findOneAndUpdate({_id:req.user._id},{$push: {taskArray:{task:task}}},function(err){
     if(err){
       console.log(err);
     } else {
-      res.redirect("/view");
+      res.redirect("/taskList");
     }
   })
-});
+})
 
-app.get("/view/:recordId",function(req,res){
-  if (req.isAuthenticated()) {
-    requestedId = req.params.recordId;
-    var foundRecord = req.user.contentArray.find(contentArray => contentArray._id == requestedId);
-    res.render("record",{clickedRecord: foundRecord});
-  } else {
-    res.redirect("/");
-  }
+app.post("/delete",function(req,res){
+  const checkedItemId = req.body.deleteItemId;
+  // const listName = req.body.listName;
+  console.log(checkedItemId);
+})
+
+// app.get("/taskList/:recordId",function(req,res){
+//   if (req.isAuthenticated()) {
+//     requestedId = req.params.recordId;
+//     var foundRecord = req.user.taskArray.find(taskArray => taskArray._id == requestedId);
+//     res.render("record",{clickedRecord: foundRecord});
+//   } else {
+//     res.redirect("/");
+//   }
+// });
+
+app.get("/logout", function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+        res.redirect("/");
+    }
+  });
 });
 
 app.listen(process.env.PORT || 5500, function () {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Dairy</title>
+    <title>KEEPER</title>
     <link rel="stylesheet" href="/css/homePage.css" />
     <script src="https://kit.fontawesome.com/f90678a76f.js" crossorigin="anonymous"></script>
   </head>
@@ -11,7 +11,7 @@
     <div class="nav">
       <input type="checkbox" id="nav-check" />
       <div class="nav-header">
-        <div class="nav-title">DAILY DIARY</div>
+        <div class="nav-title">KEEPER</div>
       </div>
       <div class="nav-btn">
         <label for="nav-check">
@@ -25,18 +25,16 @@
         <a href="/home" >HOME</a>
         <a href="#" >ABOUT</a>
         <a href="#" >HELP</a>
+        <a href="/logout" >LOGOUT</a>
       </div>
     </div>
       <div class="container">
         <div class="left">
-          <h1>Get your daily dairy online with us.</h1>
-          <p>Daily diary is a free online diary journal with lock. You can use it to record daily diary, secret thoughts, journeys, moods, and any private moments.</p>
+          <h1>Get your daily task online with us.</h1>
+          <p>Keeper is a free online task journal with lock. You can use it to record daily task, secret thoughts, and any private moments.</p>
           <div class="btn">
-            <form action="/compose" method="get" >
-              <button type="submit" class="composeBtn">Compose</button>
-            </form>
-            <form action="/view" method="get">
-              <button type="submit" class="viewBtn">Old Records</button>
+            <form action="/taskList" method="get">
+              <button type="submit" class="viewBtn">Task List</button>
             </form>
           </div>
         </div>
@@ -47,7 +45,7 @@
       <footer>
         <div class="footerDiv">
           <div class="regards">
-            <p>Made with 💚 by Pragyan</p>
+            <p>Crafted with 💚 by Pragyan</p>
           </div>
           <div class="icon">
             <a href="https://www.linkedin.com/in/pragyan-patidar/" ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
