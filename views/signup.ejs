@@ -3,20 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Dairy | Signup</title>
+    <title>KEEPER | Signup</title>
     <link rel="stylesheet" href="/css/loginPage.css" />
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="title"><span>SIGN UP</span></div>
-        <form action="/signup" method="POST">
+        <div class="title" ><span>SIGN UP</span></div>
+        <form method="post" action="/signup" onsubmit="return validatePassword()">
           <div class="row">
-            <input type="text" placeholder="Email" name="username" required />
+            <input type="email" placeholder="Email" name="username" required />
           </div>
           <div class="row">
-            <input type="password" placeholder="Password" name="password" require />
+            <input type="password" placeholder="New password" id="password" name="password" required />
           </div>
+          <div class="row">
+            <input type="password" placeholder="Confirm new password" id="confirmPassword" required />
+          </div>
+          <p id="error">Password and confirm password not matched</p>
           <div class="row button">
             <input type="submit" value="Signup" />
           </div>
@@ -29,5 +36,6 @@
         <p><b>Note:</b> Please feel free to sign up as this is only a small project and none of your information will be exploited.</p>
       </div>
     </div>
+    <script src="/js/script.js"></script>
   </body>
 </html>

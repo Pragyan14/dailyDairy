@@ -81,6 +81,9 @@ div .wrapper {
   letter-spacing: 1px;
   cursor: pointer;
 }
+.button input:hover{
+  background-color: #7ed36f;
+}
 .signup-link {
   text-align: center;
   font-size: 14px;
@@ -93,4 +96,10 @@ div .wrapper {
 }
 .signup-link a:hover {
   text-decoration: underline;
+}
+#error{
+  text-align: center;
+  color: red;
+  font-size: 14px;
+  display:none;
 }
