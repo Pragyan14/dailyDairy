@@ -8,8 +8,8 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 mongoose.set("strictQuery", true);
-// mongoose.connect(process.env.MONGODBCONNECTION);
-mongoose.connect("mongodb://0.0.0.0:27017/todolistDB",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGODBCONNECTION);
+// mongoose.connect("mongodb://0.0.0.0:27017/keeperDB",{useNewUrlParser: true});
 
 
 const app = express();
