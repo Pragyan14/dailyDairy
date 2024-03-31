@@ -27,7 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var userSchema = new mongoose.Schema({ email: String,password: String,taskArray:[{task:String}]});
+var userSchema = new mongoose.Schema({ email: String,password: String,taskArray:[{task:String,taskStatus:{type:String,default:"pending"}}]});
 userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("users", userSchema);
 
@@ -96,26 +96,7 @@ app.post("/", function (req, res) {
   });
 });
 
-// app.post("/compose",function(req,res){
-//   const submittedTitle = req.body.title;
-//   const submittedContent = req.body.content;
-
-//   let today = new Date();
-//   let options = {weekday: "short",day: "numeric",month: "short"};
-//   let day = today.toLocaleDateString("en-US", options)
-
-//   User.findOneAndUpdate({_id:req.user._id},{$push: {taskArray:{date:day,title:submittedTitle,content:submittedContent}}},function(err){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       res.redirect("/taskList");
-//     }
-//   })
-// });
-
 app.post("/addTask",function(req,res){
-  console.log(req.body);
-  console.log(req.user._id);
   const task = req.body.newTask
   User.findOneAndUpdate({_id:req.user._id},{$push: {taskArray:{task:task}}},function(err){
     if(err){
@@ -127,20 +108,39 @@ app.post("/addTask",function(req,res){
 })
 
 app.post("/delete",function(req,res){
-  const checkedItemId = req.body.deleteItemId;
-  // const listName = req.body.listName;
-  console.log(checkedItemId);
+  const itemId = req.body.itemId;
+  // console.log(itemId);
+  // console.log(req.body.checkBox);
+  // if(req.body.checkBox){
+  //   User.findOneAndUpdate(
+  //     { 
+  //       _id: req.user._id,
+  //       "taskArray._id": itemId 
+  //     },
+  //     {
+  //       $set: {
+  //         "taskArray.$.taskStatus": "completed"
+  //       }
+  //     },
+  //     { new: true }, 
+  //     (err, updatedUser) => {
+  //       if (err) {
+  //         console.error('Error updating task status:', err);
+  //       } else {
+  //         console.log('Task status updated successfully:');
+  //       }
+  //     }
+  //   );
+  // }
+  User.findOneAndUpdate({_id:req.user._id},{$pull: {taskArray: {_id: itemId }}},function(err){
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect("/taskList");
+    }
+  })
 })
 
-// app.get("/taskList/:recordId",function(req,res){
-//   if (req.isAuthenticated()) {
-//     requestedId = req.params.recordId;
-//     var foundRecord = req.user.taskArray.find(taskArray => taskArray._id == requestedId);
-//     res.render("record",{clickedRecord: foundRecord});
-//   } else {
-//     res.redirect("/");
-//   }
-// });
 
 app.get("/logout", function (req, res) {
   req.logout(function (err) {

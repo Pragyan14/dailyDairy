@@ -31,25 +31,32 @@
       </div>
     </div>
 
-    <div class="box" id="heading">
-      <h1><%= listTitle %></h1>
-    </div>
-    
-    <div class="box">
-      
+    <div class="container">
+      <div id="heading">
+        <h1><%= listTitle %></h1>
+      </div>
+
       <% taskArray.forEach(function(item){ %>
-        <form action="/delete" method="post">
-          <div class="item">
-            <input type="checkbox" name="checkBox"  />
-            <p><%= item.task %></p>
-            <button class="deleteBtn"><i class="fa-regular fa-trash-can"></i></button>
-            <input type="hidden" name="deleteItemId" value="<%=item._id%>" />
-          </div>
-        </form>
+      <form action="/delete" method="post" class="deleteForm">
+        <div class="item">
+          <input type="checkbox" name="checkBox"  />
+          <p><%= item.task %></p>
+          <button class="deleteBtn" type="submit">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+          <input type="hidden" name="itemId" value="<%=item._id%>" />
+        </div>
+      </form>
       <% }) %>
 
-      <form class="item" action="/addTask" method="post">
-        <input type="text" name="newTask" placeholder="Add Task" autocomplete="off" required/>
+      <form class="addItemForm" action="/addTask" method="post">
+        <input
+          type="text"
+          name="newTask"
+          placeholder="Add Task"
+          autocomplete="off"
+          required
+        />
         <button type="submit" class="addBtn">+</button>
       </form>
     </div>
@@ -59,13 +66,17 @@
           <p>Crafted with 💚 by Pragyan</p>
         </div>
         <div class="icon">
-          <a href="https://www.linkedin.com/in/pragyan-patidar/" ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
-          <a href="https://github.com/Pragyan14" ><i class="fa-brands fa-github fa-2xl"></i></a>
-          <a href="https://www.instagram.com/pragyanpatidar/" ><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+          <a href="https://www.linkedin.com/in/pragyan-patidar/" target="_blank"
+            ><i class="fa-brands fa-linkedin fa-2xl"></i
+          ></a>
+          <a href="https://github.com/Pragyan14" target="_blank"
+            ><i class="fa-brands fa-github fa-2xl"></i
+          ></a>
+          <a href="https://www.instagram.com/pragyanpatidar/" target="_blank"
+            ><i class="fa-brands fa-square-instagram fa-2xl"></i
+          ></a>
         </div>
       </div>
     </footer>
-  </body>
-  </html>
   </body>
 </html>
